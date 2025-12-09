@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Menu, X } from 'lucide-react';
 import Image from 'next/image';
+import Link from 'next/link';
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
@@ -17,7 +18,7 @@ export default function Navbar() {
   }, []);
 
   const navLinks = [
-    { name: 'Products', href: '#products' },
+    { name: 'Products', href: '/products' },
     { name: 'Franchise', href: '#franchise' },
     { name: 'Testimonials', href: '#testimonials' },
     { name: 'About Us', href: '#about' }
@@ -39,8 +40,19 @@ export default function Navbar() {
             whileHover={{ scale: 1.05 }}
             className="flex items-center space-x-3"
           >
-            <Image alt="Logo" src="/Logo.svg" height={100} width={100} />
-            
+            <div className="relative w-12 h-12 md:w-16 md:h-16 lg:w-20 lg:h-20">
+             <Link href="/" >
+      <Image
+        alt="Adarshini Logo"
+        src="/Adarshini_logo.PNG"
+        fill
+        className="object-contain"
+        priority
+      />
+    </Link>
+
+              
+            </div>            
           </motion.div>
 
           {/* Desktop Nav Links */}

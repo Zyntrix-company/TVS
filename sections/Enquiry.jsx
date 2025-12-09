@@ -56,7 +56,7 @@ export default function FranchiseEnquiry() {
   ];
 
   return (
-    <section 
+    <section id='franchise' 
       ref={ref}
       className="relative py-16 lg:py-24 overflow-hidden"
       style={{
@@ -124,11 +124,14 @@ export default function FranchiseEnquiry() {
               transition={{ duration: 0.3 }}
               className="relative rounded-2xl overflow-hidden shadow-2xl"
             >
-              <img
-                src="https://images.unsplash.com/photo-1497366216548-37526070297c?w=800&q=80"
-                alt="TVS Showroom and Franchise"
-                className="w-full h-auto object-cover"
-              />
+              <div className="w-[500px] h-[350px] md:w-[600px] md:h-[400px] mx-auto">
+  <img
+    src="/Reception.jpg"
+    alt="TVS Showroom and Franchise"
+    className="w-full h-full object-cover"
+  />
+</div>
+
               
               {/* Overlay Gradient */}
               <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent" />

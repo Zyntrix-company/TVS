@@ -72,15 +72,7 @@ const ProductCard = ({ product, index }) => {
             {product.specs}
           </p>
 
-          <div className="mb-6">
-            <span className="text-gray-500 text-sm font-medium">Starting from</span>
-            <p 
-              className="text-3xl lg:text-4xl font-bold text-blue-900 mt-1"
-              style={{ fontFamily: 'Montserrat, sans-serif' }}
-            >
-              {product.price}
-            </p>
-          </div>
+          
           
           <p 
             className="text-gray-700 text-base lg:text-lg leading-relaxed mb-8 max-w-xl mx-auto lg:mx-0"
@@ -90,14 +82,19 @@ const ProductCard = ({ product, index }) => {
           </p>
           
           <motion.button
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-            className="bg-blue-900 text-white px-8 py-4 rounded-lg font-bold text-base hover:bg-gray-800 transition-colors inline-flex items-center gap-2 shadow-lg"
-            style={{ fontFamily: 'Montserrat, sans-serif' }}
-          >
-            Explore Model
-            <ChevronRight size={20} />
-          </motion.button>
+  whileHover={{ scale: 1.05 }}
+  whileTap={{ scale: 0.95 }}
+  onClick={() => {
+    const message = encodeURIComponent(product.name);
+    window.location.href = `https://wa.me/919005050191?text=${message}`;
+  }}
+  className="bg-blue-900 text-white px-8 py-4 rounded-lg font-bold text-base hover:bg-gray-800 transition-colors inline-flex items-center gap-2 shadow-lg"
+  style={{ fontFamily: 'Montserrat, sans-serif' }}
+>
+  Explore Model
+  <ChevronRight size={20} />
+</motion.button>
+
         </motion.div>
       </div>
       

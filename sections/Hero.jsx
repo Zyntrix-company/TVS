@@ -110,9 +110,10 @@ flex flex-col justify-start pt-[10vh] md:pt-[14vh] lg:pt-[18vh]">
       </div>
 
       {/* Bottom Cards */}
-      <div className="absolute bottom-0 left-0 right-0 z-20 bg-gradient-to-t from-black/80 to-transparent pt-10 pb-8">
-        <div className="max-w-7xl mx-auto px-4">
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+      {/* Bottom Cards */}
+      <div className="absolute bottom-0 left-0 right-0 z-20 bg-gradient-to-t from-black/80 to-transparent pt-6 pb-4 sm:pt-8 sm:pb-6 md:pt-10 md:pb-8">
+        <div className="max-w-7xl mx-auto px-3 sm:px-4">
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-2 sm:gap-3 md:gap-4">
             {slides.map((slide, index) => (
               <motion.div
                 key={index}
@@ -123,7 +124,7 @@ flex flex-col justify-start pt-[10vh] md:pt-[14vh] lg:pt-[18vh]">
                   y: activeSlide === index ? -6 : 0
                 }}
                 transition={{ duration: 0.4, ease: "easeOut" }}
-                className={`cursor-pointer p-6 rounded-xl transition-all duration-300 backdrop-blur-lg 
+                className={`cursor-pointer p-3 sm:p-4 md:p-5 lg:p-6 rounded-lg sm:rounded-xl transition-all duration-300 backdrop-blur-lg 
                 ${
                   activeSlide === index
                     ? 'bg-white text-black shadow-xl border border-gray-200'
@@ -131,13 +132,13 @@ flex flex-col justify-start pt-[10vh] md:pt-[14vh] lg:pt-[18vh]">
                 }`}
               >
                 <h3
-                  className="text-lg font-semibold mb-2"
+                  className="text-xs sm:text-sm md:text-base lg:text-lg font-semibold mb-1 sm:mb-2 line-clamp-1"
                   style={{ fontFamily: 'Montserrat, sans-serif' }}
                 >
                   {slide.title}
                 </h3>
                 <p
-                  className="text-sm opacity-80"
+                  className="text-[10px] sm:text-xs md:text-sm opacity-80 line-clamp-2"
                   style={{ fontFamily: 'Inter, sans-serif' }}
                 >
                   {slide.description}
@@ -146,7 +147,7 @@ flex flex-col justify-start pt-[10vh] md:pt-[14vh] lg:pt-[18vh]">
                 {activeSlide === index && (
                   <motion.div
                     layoutId="activeIndicator"
-                    className="mt-4 h-[3px] w-16 bg-black rounded-full"
+                    className="mt-2 sm:mt-3 md:mt-4 h-[2px] sm:h-[3px] w-10 sm:w-12 md:w-16 bg-black rounded-full"
                     transition={{ duration: 0.3 }}
                   />
                 )}
