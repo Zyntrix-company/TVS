@@ -9,22 +9,22 @@ export default function Hero() {
 
   const slides = [
     {
-      image: 'https://images.unsplash.com/photo-1558981359-219d6364c9c8?w=1920&q=80',
+      image: '/hero_image1.png',
       title: 'Our Showrooms',
       description: 'Premium TVS outlets offering a seamless buying experience.'
     },
     {
-      image: 'https://images.unsplash.com/photo-1568772585407-9361f9bf3a87?w=1920&q=80',
+      image: '/Hero_image2.png',
       title: 'Motorcycle Range',
       description: 'Performance bikes, commuters, and modern cruisers — all in one place.'
     },
     {
-      image: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=1920&q=80',
+      image: '/Hero_image3.png',
       title: 'Service & Support',
       description: 'Certified maintenance, genuine parts, and expert assistance.'
     },
     {
-      image: 'https://images.unsplash.com/photo-1609630875171-b1321377ee65?w=1920&q=80',
+      image: '/Hero_Image5.jpeg',
       title: 'Franchise Program',
       description: 'Grow with us — become an authorized TVS franchise partner.'
     }
@@ -91,7 +91,8 @@ flex flex-col justify-start pt-[10vh] md:pt-[14vh] lg:pt-[18vh]">
             Explore a complete range of TVS motorcycles — from performance-built machines to everyday commuting companions. Built with precision engineering, modern technology, and unmatched reliability.
           </motion.p>
 
-          <motion.button
+          <div className='flex gap-2 '>
+            <motion.button
             initial={{ opacity: 0, y: 40 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.3 }}
@@ -106,6 +107,22 @@ flex flex-col justify-start pt-[10vh] md:pt-[14vh] lg:pt-[18vh]">
               <ChevronRight size={22} />
             </motion.span>
           </motion.button>
+          <motion.button
+            initial={{ opacity: 0, y: 40 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.3 }}
+            whileHover={{ scale: 1.06 }}
+            whileTap={{ scale: 0.95 }}
+            className="bg-black text-white px-8 py-4 rounded-xl font-semibold text-lg 
+            transition-all duration-300 inline-flex items-center gap-3 shadow-lg hover:shadow-2xl"
+            style={{ fontFamily: 'Montserrat, sans-serif' }}
+          >
+            Connect on WhatsApp
+            <motion.span whileHover={{ x: 6 }}>
+              <ChevronRight size={22} />
+            </motion.span>
+          </motion.button>
+          </div>
         </div>
       </div>
 

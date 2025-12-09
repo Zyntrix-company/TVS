@@ -106,7 +106,7 @@ export default function Footer() {
                 className="flex items-start gap-3 text-gray-400 hover:text-white transition-colors"
               >
                 <MapPin size={18} />
-                <span className="text-sm">Adarshini TVS, Hyderabad, Telangana, India</span>
+                <span className="text-sm">Rajdhani Road Haibatpur, Mod, near Maldepur, Ballia, Uttar Pradesh 277001</span>
               </a>
             </div>
           </motion.div>
@@ -167,7 +167,7 @@ export default function Footer() {
       <div className="border-t border-gray-800">
         <div className="max-w-7xl mx-auto px-4 py-6 flex flex-col md:flex-row justify-between items-center gap-4">
           
-          <p className="text-gray-400 text-sm">© 2025 Adarshini TVS. All rights reserved.</p>
+          <p className="text-gray-400 text-sm">© 2025 Adarshini TVS. All rights reserved. In coloboration with V I G Y A P A N W A L A.</p>
 
           <div className="flex items-center gap-3">
             {socialLinks.map((s, i) => (

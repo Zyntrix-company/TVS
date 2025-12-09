@@ -21,7 +21,7 @@ export default function Testimonials() {
   const testimonials = [
     {
       name: "Rajesh Kumar",
-      role: "Apache RR 310 Owner",
+      role: "Raider 125 Owner",
       location: "Mumbai, Maharashtra",
       productImage: "/Happy customer_1.jpg",
       rating: 5,
@@ -36,7 +36,7 @@ export default function Testimonials() {
       text: "I've been using my TVS Jupiter for daily commutes for 3 years now. It's incredibly reliable, fuel-efficient, and the service support is outstanding. Best decision I made for city riding!"
     },
     {
-      name: "Arjun Reddy",
+      name: "Arjun Singh",
       role: "Ronin Owner",
       location: "Hyderabad, Telangana",
       productImage: "/Happy customer_3.jpg",
