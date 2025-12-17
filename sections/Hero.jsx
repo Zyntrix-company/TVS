@@ -6,6 +6,7 @@ import { ChevronRight } from 'lucide-react';
 
 export default function Hero() {
   const [activeSlide, setActiveSlide] = useState(0);
+  const [imagesLoaded, setImagesLoaded] = useState(false);
 
   const slides = [
     {
@@ -30,52 +31,82 @@ export default function Hero() {
     }
   ];
 
+  // Preload all images
   useEffect(() => {
+    const imagePromises = slides.map((slide) => {
+      return new Promise((resolve, reject) => {
+        const img = new Image();
+        img.src = slide.image;
+        img.onload = resolve;
+        img.onerror = reject;
+      });
+    });
+
+    Promise.all(imagePromises)
+      .then(() => setImagesLoaded(true))
+      .catch((err) => {
+        console.error('Error preloading images:', err);
+        setImagesLoaded(true); // Still show content even if preload fails
+      });
+  }, []);
+
+  useEffect(() => {
+    if (!imagesLoaded) return; // Don't start carousel until images are loaded
+    
     const interval = setInterval(() => {
       setActiveSlide((prev) => (prev + 1) % slides.length);
-    }, 6000); // Increased for premium slower pacing
+    }, 6000);
     return () => clearInterval(interval);
-  }, [slides.length]);
+  }, [slides.length, imagesLoaded]);
 
   const handleBoxClick = (index) => {
     setActiveSlide(index);
   };
 
   return (
-    <section className="relative w-full h-screen min-h-[650px] overflow-hidden">
+    <section className="relative w-full h-screen min-h-[650px] overflow-hidden bg-black">
       
+      {/* Loading State */}
+      {!imagesLoaded && (
+        <div className="absolute inset-0 flex items-center justify-center bg-black">
+          <div className="animate-pulse text-white text-lg">Loading...</div>
+        </div>
+      )}
+
       {/* Background Image Carousel */}
-      <AnimatePresence initial={false}>
-        <motion.div
-          key={activeSlide}
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
-          transition={{ duration: 0.7, ease: "easeOut" }}
-          className="absolute inset-0"
-        >
-          <div
-            className="absolute inset-0 bg-cover bg-center transition-all duration-700"
-            style={{
-              backgroundImage: `url(${slides[activeSlide].image})`,
-            }}
-          />
-          
-          {/* Gradient Overlay for premium contrast */}
-          <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/30 to-black/10" />
-        </motion.div>
-      </AnimatePresence>
+      {imagesLoaded && (
+        <AnimatePresence initial={false}>
+          <motion.div
+            key={activeSlide}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.7, ease: "easeOut" }}
+            className="absolute inset-0"
+          >
+            <div
+              className="absolute inset-0 bg-cover bg-center"
+              style={{
+                backgroundImage: `url(${slides[activeSlide].image})`,
+              }}
+            />
+            
+            {/* Gradient Overlay for premium contrast */}
+            <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/30 to-black/10" />
+          </motion.div>
+        </AnimatePresence>
+      )}
 
       {/* Hero Content */}
       <div className="relative z-10 max-w-7xl w-[90%] mx-auto px-4 h-full 
-flex flex-col justify-start pt-[10vh] md:pt-[14vh] lg:pt-[18vh]">
+flex flex-col justify-start pt-[8vh] sm:pt-[10vh] md:pt-[14vh] lg:pt-[18vh]">
 
         <div className="max-w-2xl">
           <motion.h1
             initial={{ opacity: 0, y: 40 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
-            className="text-4xl sm:text-5xl lg:text-6xl font-bold text-white mb-4 leading-[1.15]"
+            className="text-3xl sm:text-5xl lg:text-6xl font-bold text-white mb-3 sm:mb-4 leading-[1.15]"
             style={{ fontFamily: 'Montserrat, sans-serif' }}
           >
             Ride Power. Ride Confidence. Ride TVS.
@@ -85,7 +116,7 @@ flex flex-col justify-start pt-[10vh] md:pt-[14vh] lg:pt-[18vh]">
             initial={{ opacity: 0, y: 40 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
-            className="text-sm md:text-lg text-white/80 mb-6 lg:mb-8 leading-relaxed"
+            className="text-xs sm:text-sm md:text-lg text-white/80 mb-4 sm:mb-6 lg:mb-8 leading-relaxed"
             style={{ fontFamily: 'Inter, sans-serif' }}
           >
             Explore a complete range of TVS motorcycles — from performance-built machines to everyday commuting companions. Built with precision engineering, modern technology, and unmatched reliability.
@@ -98,7 +129,7 @@ flex flex-col justify-start pt-[10vh] md:pt-[14vh] lg:pt-[18vh]">
             transition={{ duration: 0.8, delay: 0.3 }}
             whileHover={{ scale: 1.06 }}
             whileTap={{ scale: 0.95 }}
-            className="bg-white text-black px-3 py-3 md:px-6 md:py-4 rounded-xl font-semibold text-xs sm:text-sm md:text-base leading-tight 
+            className="bg-white text-black px-3 py-2.5 sm:py-3 md:px-6 md:py-4 rounded-xl font-semibold text-xs sm:text-sm md:text-base leading-tight 
             transition-all duration-300 inline-flex items-center justify-center gap-2 sm:gap-3 shadow-lg hover:shadow-2xl flex-1 min-w-0"
             style={{ fontFamily: 'Montserrat, sans-serif' }}
           >
@@ -113,7 +144,7 @@ flex flex-col justify-start pt-[10vh] md:pt-[14vh] lg:pt-[18vh]">
             transition={{ duration: 0.8, delay: 0.3 }}
             whileHover={{ scale: 1.06 }}
             whileTap={{ scale: 0.95 }}
-            className="bg-black text-white px-3 py-3 md:px-6 md:py-4 rounded-xl font-semibold text-xs sm:text-sm md:text-base leading-tight 
+            className="bg-black text-white px-3 py-2.5 sm:py-3 md:px-6 md:py-4 rounded-xl font-semibold text-xs sm:text-sm md:text-base leading-tight 
             transition-all duration-300 inline-flex items-center justify-center gap-2 sm:gap-3 shadow-lg hover:shadow-2xl flex-1 min-w-0"
             style={{ fontFamily: 'Montserrat, sans-serif' }}
           >
@@ -127,8 +158,7 @@ flex flex-col justify-start pt-[10vh] md:pt-[14vh] lg:pt-[18vh]">
       </div>
 
       {/* Bottom Cards */}
-      {/* Bottom Cards */}
-      <div className="absolute bottom-0 left-0 right-0 z-20 bg-gradient-to-t from-black/80 to-transparent pt-6 pb-4 sm:pt-8 sm:pb-6 md:pt-10 md:pb-8">
+      <div className="absolute bottom-0 left-0 right-0 z-20 bg-gradient-to-t from-black/80 to-transparent pt-3 pb-3 sm:pt-6 sm:pb-4 md:pt-8 md:pb-6">
         <div className="max-w-7xl mx-auto px-3 sm:px-4">
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-2 sm:gap-3 md:gap-4">
             {slides.map((slide, index) => (
@@ -138,10 +168,10 @@ flex flex-col justify-start pt-[10vh] md:pt-[14vh] lg:pt-[18vh]">
                 whileHover={{ scale: 1.04 }}
                 animate={{
                   scale: activeSlide === index ? 1.04 : 1,
-                  y: activeSlide === index ? -6 : 0
+                  y: activeSlide === index ? -4 : 0
                 }}
                 transition={{ duration: 0.4, ease: "easeOut" }}
-                className={`cursor-pointer p-3 sm:p-4 md:p-5 lg:p-6 rounded-lg sm:rounded-xl transition-all duration-300 backdrop-blur-lg 
+                className={`cursor-pointer p-2.5 sm:p-4 md:p-5 lg:p-6 rounded-lg sm:rounded-xl transition-all duration-300 backdrop-blur-lg 
                 ${
                   activeSlide === index
                     ? 'bg-white text-black shadow-xl border border-gray-200'
@@ -155,7 +185,7 @@ flex flex-col justify-start pt-[10vh] md:pt-[14vh] lg:pt-[18vh]">
                   {slide.title}
                 </h3>
                 <p
-                  className="text-[10px] sm:text-xs md:text-sm opacity-80 line-clamp-2"
+                  className="text-[9px] sm:text-xs md:text-sm opacity-80 line-clamp-2"
                   style={{ fontFamily: 'Inter, sans-serif' }}
                 >
                   {slide.description}
@@ -164,7 +194,7 @@ flex flex-col justify-start pt-[10vh] md:pt-[14vh] lg:pt-[18vh]">
                 {activeSlide === index && (
                   <motion.div
                     layoutId="activeIndicator"
-                    className="mt-2 sm:mt-3 md:mt-4 h-[2px] sm:h-[3px] w-10 sm:w-12 md:w-16 bg-black rounded-full"
+                    className="mt-1.5 sm:mt-3 md:mt-4 h-[2px] sm:h-[3px] w-8 sm:w-12 md:w-16 bg-black rounded-full"
                     transition={{ duration: 0.3 }}
                   />
                 )}
@@ -173,9 +203,6 @@ flex flex-col justify-start pt-[10vh] md:pt-[14vh] lg:pt-[18vh]">
           </div>
         </div>
       </div>
-
-      {/* Dot Indicators */}
-    
     </section>
   );
 }
