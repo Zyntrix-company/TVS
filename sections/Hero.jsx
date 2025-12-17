@@ -91,19 +91,19 @@ flex flex-col justify-start pt-[10vh] md:pt-[14vh] lg:pt-[18vh]">
             Explore a complete range of TVS motorcycles — from performance-built machines to everyday commuting companions. Built with precision engineering, modern technology, and unmatched reliability.
           </motion.p>
 
-          <div className='flex gap-2 '>
+          <div className='flex flex-row gap-2 sm:gap-4 w-full max-w-full'>
             <motion.button
             initial={{ opacity: 0, y: 40 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.3 }}
             whileHover={{ scale: 1.06 }}
             whileTap={{ scale: 0.95 }}
-            className="bg-white text-black px-8 py-4 rounded-xl font-semibold text-lg 
-            transition-all duration-300 inline-flex items-center gap-3 shadow-lg hover:shadow-2xl"
+            className="bg-white text-black px-3 py-3 md:px-6 md:py-4 rounded-xl font-semibold text-xs sm:text-sm md:text-base leading-tight 
+            transition-all duration-300 inline-flex items-center justify-center gap-2 sm:gap-3 shadow-lg hover:shadow-2xl flex-1 min-w-0"
             style={{ fontFamily: 'Montserrat, sans-serif' }}
           >
             Book a Test Ride
-            <motion.span whileHover={{ x: 6 }}>
+            <motion.span whileHover={{ x: 6 }} className="hidden sm:inline-flex">
               <ChevronRight size={22} />
             </motion.span>
           </motion.button>
@@ -113,12 +113,12 @@ flex flex-col justify-start pt-[10vh] md:pt-[14vh] lg:pt-[18vh]">
             transition={{ duration: 0.8, delay: 0.3 }}
             whileHover={{ scale: 1.06 }}
             whileTap={{ scale: 0.95 }}
-            className="bg-black text-white px-8 py-4 rounded-xl font-semibold text-lg 
-            transition-all duration-300 inline-flex items-center gap-3 shadow-lg hover:shadow-2xl"
+            className="bg-black text-white px-3 py-3 md:px-6 md:py-4 rounded-xl font-semibold text-xs sm:text-sm md:text-base leading-tight 
+            transition-all duration-300 inline-flex items-center justify-center gap-2 sm:gap-3 shadow-lg hover:shadow-2xl flex-1 min-w-0"
             style={{ fontFamily: 'Montserrat, sans-serif' }}
           >
             Connect on WhatsApp
-            <motion.span whileHover={{ x: 6 }}>
+            <motion.span whileHover={{ x: 6 }} className="hidden sm:inline-flex">
               <ChevronRight size={22} />
             </motion.span>
           </motion.button>
